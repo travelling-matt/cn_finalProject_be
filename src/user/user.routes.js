@@ -9,6 +9,6 @@ const userRouter = Router();
 
 userRouter.post("/user", hashPassword, addUser);
 userRouter.post("/login", decryptPassword, login);
-userRouter.get("/user", tockenDecoding, login);
+userRouter.get("/user", tokenDecoding, login);
 
 module.exports = userRouter;
