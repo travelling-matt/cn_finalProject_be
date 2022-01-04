@@ -19,6 +19,7 @@ exports.tokenDecoding = async(req, res, next)=>{
 
 };
 
+//hashing password
 exports.hashPassword = async (req, req, next) =>{
     try{
         req.body.password = await bccrypt.hash(req.body.password, 8);
@@ -28,6 +29,7 @@ exports.hashPassword = async (req, req, next) =>{
     }
 };
 
+// finding email and checking if the password matches
 exports.decryptPassword = async (req, res, next) =>{
     try{
         req.user = await User.findOne({email: req.body.email});
