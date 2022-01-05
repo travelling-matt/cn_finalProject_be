@@ -1,6 +1,6 @@
-const bccrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const User = require("./user/user.model");
+const User = require("../user/user.model");
 
 exports.tokenDecoding = async(req, res, next)=>{
     try{
@@ -19,9 +19,9 @@ exports.tokenDecoding = async(req, res, next)=>{
 
 };
 
-exports.hashPassword = async (req, req, next) =>{
+exports.hashPassword = async (req, res, next) =>{
     try{
-        req.body.password = await bccrypt.hash(req.body.password, 8);
+        req.body.password = await bcrypt.hash(req.body.password, 8);
         next()
     }catch (err){
         console.log(err)
@@ -31,7 +31,7 @@ exports.hashPassword = async (req, req, next) =>{
 exports.decryptPassword = async (req, res, next) =>{
     try{
         req.user = await User.findOne({email: req.body.email});
-        if (await bccrypt.compare(req.body.password, req.user.password)){
+        if (await bcrypt.compare(req.body.password, req.user.password)){
             next();
         }else{
             throw new Error ();
