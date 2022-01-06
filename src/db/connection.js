@@ -1,5 +1,7 @@
-const mongoose = require("mongoose");
 require("dotenv").config();
+const mongoose = require("mongoose");
+const { Sequelize } = require("sequelize");
+const sequelize = new Sequelize(process.env.MYSQL_URI);
 
 const connection = async () => {
     try {
@@ -8,5 +10,9 @@ const connection = async () => {
         console.log(error);
     }
 };
+
+sequelize.authenticate();
+
+module.exports = sequelize;
 
 connection();

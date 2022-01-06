@@ -8,6 +8,7 @@ exports.addUser = async (req, res) => {
     res.status(200).send({ user: user.email, token });
   } catch (error) {
     console.log(error);
+    res.status(500).send({message: "An error has occured"});
   }
 };
 
@@ -17,5 +18,6 @@ exports.login = async (req, res) => {
     res.status(200).send({ user: req.user.email, token });
   } catch (error) {
     console.log(error);
+    res.status(500).send({message: "An error has occured"});
   }
 };

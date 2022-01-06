@@ -10,13 +10,14 @@
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.4",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.12.5",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
     "start": "node src/server.js"
   },
-  "eslintConfig": {
-  },
+  "eslintConfig": {},
   "browserslist": {
     "production": [
       ">0.2%",
