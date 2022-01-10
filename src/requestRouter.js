@@ -13,6 +13,6 @@ requestRouter.post("/login", decryptPassword, login);
 requestRouter.get("/user", tokenDecoding, login);
 requestRouter.get("/fetchDrinks", getAllDrinks);
 requestRouter.post("/fetchIngredients", getMissingIngredients);
-requestRouter.post("/addIngredients", addIngredients)
+requestRouter.post("/addIngredients", addIngredients);
 
 module.exports = requestRouter;
