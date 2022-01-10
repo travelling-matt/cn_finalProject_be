@@ -33,9 +33,9 @@ exports.login = async (req, res) => {
 
 exports.addIngredients = async (req, res) => {
   try {
-      const filter = { user : req.body.user }
-      const update = { ingredients : req.body.ingredients }
-      console.log(update)
+      const filter = { email : req.body.user };
+      const update = { ingredients : req.body.ingredients };
+      console.log(update, filter);
       const ingredientAdded = await User.findOneAndUpdate(filter, update, {new:true});
       res.status(200).send({ 
         message:"ingredients updated",
@@ -46,3 +46,16 @@ exports.addIngredients = async (req, res) => {
     res.status(500).send({message: `${error}`});
   }
 };
+
+exports.fetchUserIngredients = async (req, res) => {
+  try {
+    const filter = { email: req.body.user };
+    const result = await User.findOne(filter);
+    res.status(200).send({
+      message: "Fetched ingredients",
+      ingredients: result.ingredients
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}

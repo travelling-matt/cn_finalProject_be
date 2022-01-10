@@ -1,5 +1,5 @@
 const { Router, request } = require("express");
-const { addUser, login, addIngredients } = require("./user/user.methods.js");
+const { addUser, login, addIngredients, fetchUserIngredients } = require("./user/user.methods.js");
 const { getAllDrinks, getMissingIngredients } = require("./beverage/beverage.methods.js");
 const {
     decryptPassword,
@@ -14,5 +14,6 @@ requestRouter.get("/user", tokenDecoding, login);
 requestRouter.get("/fetchDrinks", getAllDrinks);
 requestRouter.post("/fetchIngredients", getMissingIngredients);
 requestRouter.post("/addIngredients", addIngredients);
+requestRouter.post("/fetchUserIngredients", fetchUserIngredients);
 
 module.exports = requestRouter;
