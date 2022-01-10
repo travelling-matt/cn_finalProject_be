@@ -30,3 +30,19 @@ exports.login = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.addIngredients = async (req, res) => {
+  try {
+    // if (req.user = await User.findOne({email: req.body.email})) {
+    //   throw new Error (`email already exists: ${req.body.email}`);
+    // } else {
+      const ingredientAdded = await User.findOneAndUpdate({email: req.body.user, ingredients: req.body.userIngredients});
+      res.status(200).send({ 
+        message:"ingredients updated",
+        ingredientAdded
+      });
+    } catch (error) {
+    console.log(error);
+    res.status(500).send({message: `${error}`});
+  }
+};
