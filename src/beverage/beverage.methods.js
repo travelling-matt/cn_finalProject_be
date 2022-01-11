@@ -41,6 +41,22 @@ exports.getAllDrinks = async (req, res) => {
     }
 };
 
+exports.getAllByLetter = async (req, res) => {
+    try {
+        const filter = `${req.body.letter}%`;
+        const list = await drink.findAll({
+            where: {name: {[sequelize.Op.like]: filter}},
+            attributes: ['id', 'name', 'alcoholic', 'ingredient1', 'ingredient2', 'ingredient3', 'ingredient4', 'ingredient5', 'ingredient6', 
+            'ingredient7', 'ingredient8', 'ingredient9', 'ingredient10', 'ingredient11', 'ingredient12', 'ingredient13', 'ingredient14', 
+            'ingredient15', 'thumbnailURL']
+        });
+        res.status(200).send({message: "Returning cocktails", results: list});
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({message: "An error has occured"});
+    }
+}
+
 exports.getMissingIngredients = async (req, res) => {
     try {
         let userIngredients = req.body.userIngredients;
