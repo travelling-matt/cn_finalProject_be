@@ -4,8 +4,8 @@ const User = require("../user/user.model");
 
 exports.tokenDecoding = async(req, res, next)=>{
     try{
-        const token = req.header("Authorization").replace("Bearer", "");
-        const decodedToken = await jwt.verify(token, process.env.Secret);
+        const token = req.header("Authorization").replace("Bearer ", "");
+        const decodedToken = await jwt.verify(token, process.env.SECRET);
         req.user = await User.findById(decodedToken._id);
         if (req.user){
             next();
@@ -15,8 +15,6 @@ exports.tokenDecoding = async(req, res, next)=>{
     }catch(err){
         console.log(err)
     }
-
-
 };
 
 exports.hashPassword = async (req, res, next) =>{
