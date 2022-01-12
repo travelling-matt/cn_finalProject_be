@@ -8,7 +8,8 @@ exports.addUser = async (req, res) => {
     } else {
       const user = await User.create(req.body);
       const token = jwt.sign({ _id: user._id }, process.env.SECRET);
-      res.status(200).send({ 
+      res.status(200).send({
+        message: `${req.user.email} account successfully created`,
         user: user.email, 
         token, 
       });
