@@ -39,6 +39,6 @@ exports.decryptPassword = async (req, res, next) =>{
         };
     }catch(err){
         console.log(err) //passes error message to server terminal
-        res.status(500).send({message: `${err}`}); //passes email or password incorrect to browser (as appropriate)
+        res.status(500).send({message: `${err}`, userMessage: "Email or Password is incorrect"}); //passes email or password incorrect to browser (as appropriate)
     }
 }

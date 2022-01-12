@@ -2,21 +2,26 @@ const User = require("./user.model");
 const jwt = require("jsonwebtoken");
 
 exports.addUser = async (req, res) => {
+  let userMessage;
   try {
     if (req.user = await User.findOne({email: req.body.email})) {
-      throw new Error (`email already exists: ${req.body.email}`);
+      userMessage = "An account already exists with this email";
+      throw new Error (`Email already exists: ${req.body.email}`);
     } else {
       const user = await User.create(req.body);
       const token = jwt.sign({ _id: user._id }, process.env.SECRET);
       res.status(200).send({
-        message: `${req.user.email} account successfully created`,
+        message: `${user.email} account successfully created`,
         user: user.email, 
-        token, 
+        token
       });
     };
   }catch (error) {
     console.log(error);
-    res.status(500).send({message: `${error}`});
+    res.status(500).send({
+      message: error,
+      userMessage
+    });
   }
 };
 
